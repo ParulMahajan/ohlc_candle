@@ -1,0 +1,112 @@
+server:
+  port: 8080
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 5s
+  datasource:
+    url: jdbc:postgresql://localhost:5432/candle_db
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate   # for dev; for prod use 'validate' update or migrations
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    open-in-view: false
+
+candle:
+  recent-candles-cache-limit: 10
+  supported-intervals:
+    - SEC_1
+    - SEC_5
+    - MIN_1
+    - MIN_15
+    - MIN_30
+    - HOUR_1
+    - DAY_1
+  tick-generation:
+    enabled: true
+    rate-millis: 1000
+  symbols:
+    BTC-USD:
+      bounds:
+        min: 85000.0
+        max: 95000.0
+        initial: 90000.0
+      spread: 1.0
+      volatility: 50.0
+    ETH-USD:
+      bounds:
+        min: 2500.0
+        max: 3500.0
+        initial: 3000.0
+      spread: 0.4
+      volatility: 10.0
+    BNB-USD:
+      bounds:
+        min: 500.0
+        max: 700.0
+        initial: 600.0
+      spread: 0.2
+      volatility: 5.0
+    SOL-USD:
+      bounds:
+        min: 200.0
+        max: 280.0
+        initial: 240.0
+      spread: 0.1
+      volatility: 3.0
+    ADA-USD:
+      bounds:
+        min: 0.70
+        max: 1.00
+        initial: 0.85
+      spread: 0.002
+      volatility: 0.01
+    DOT-USD:
+      bounds:
+        min: 6.0
+        max: 9.0
+        initial: 7.5
+      spread: 0.02
+      volatility: 0.1
+    MATIC-USD:
+      bounds:
+        min: 0.35
+        max: 0.55
+        initial: 0.45
+      spread: 0.002
+      volatility: 0.01
+    AVAX-USD:
+      bounds:
+        min: 30.0
+        max: 40.0
+        initial: 35.0
+      spread: 0.04
+      volatility: 0.5
+    LINK-USD:
+      bounds:
+        min: 12.0
+        max: 18.0
+        initial: 15.0
+      spread: 0.02
+      volatility: 0.2
+    UNI-USD:
+      bounds:
+        min: 7.0
+        max: 10.0
+        initial: 8.5
+      spread: 0.02
+      volatility: 0.1
+      
+logging:
+  level:
+    ROOT: INFO
+    com.example.candle: DEBUG  
+    org.hibernate.SQL: ERROR
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
