@@ -1,4 +1,4 @@
-package com.example.candle.service;
+package com.example.candle.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.candle.config.CandleProperties;
 import com.example.candle.model.BidAskEvent;
+import com.example.candle.service.CandleAggregationService;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
