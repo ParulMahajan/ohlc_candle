@@ -12,7 +12,7 @@ import com.example.candle.entity.Candle;
 public class CandleConfig {
 
 	@Bean
-	public BlockingQueue<Candle> candleFlushQueue() {
+	public BlockingQueue<Candle> flushQueue() {
 		// Unbounded for demo; in prod i will bound it to 100-100
 		return new LinkedBlockingQueue<>();
 	}

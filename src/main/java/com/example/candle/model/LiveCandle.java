@@ -29,13 +29,6 @@ public class LiveCandle {
         this.volume = 1L;
     }
 
-    public static LiveCandle newFromTick(String symbol,
-                                         Interval interval,
-                                         long bucketStartEpochMillis,
-                                         double price) {
-        return new LiveCandle(symbol, interval, bucketStartEpochMillis, price);
-    }
-
     public void updateWithTick(double price) {
         if (price > high) high = price;
         if (price < low) low = price;
