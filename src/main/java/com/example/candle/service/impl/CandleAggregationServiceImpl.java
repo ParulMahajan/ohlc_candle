@@ -2,6 +2,7 @@ package com.example.candle.service.impl;
 
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
@@ -41,10 +42,12 @@ public class CandleAggregationServiceImpl implements CandleAggregationService,Sm
 
 	@Override
 	public void onBidAskEvent(BidAskEvent event) {
-
+		
+		if (!running) return;
+		
 		long ts = event.timestampMillis();
 		String symbol = event.symbol();
-
+		
 		double price = (event.bid() + event.ask()) / 2.0; // midprice
 
 		Map<Interval, LiveCandle> symbolMap = liveCandles.computeIfAbsent(symbol, s -> new ConcurrentHashMap<>());
@@ -66,7 +69,7 @@ public class CandleAggregationServiceImpl implements CandleAggregationService,Sm
 			}
 
 			// 2) Try recently closed
-			List<LiveCandle> closedList = closedMap.computeIfAbsent(interval, i -> new CopyOnWriteArrayList<>()); // am considering late tickers will be very less
+			List<LiveCandle> closedList = closedMap.computeIfAbsent(interval, i -> new ArrayList<>());
 
 			boolean recovered = false;
 

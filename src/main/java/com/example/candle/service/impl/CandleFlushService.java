@@ -68,7 +68,7 @@ public class CandleFlushService implements SmartLifecycle{
     			} catch (Exception ex) {
     				log.error("Failed batch write ({} items), requeuing", batch.size(), ex);
     				for (Candle failed : batch)
-    					flushQueue.offer(failed);
+    					flushQueue.offer(failed);    				
     				Thread.sleep(500);
     			}
     		}
