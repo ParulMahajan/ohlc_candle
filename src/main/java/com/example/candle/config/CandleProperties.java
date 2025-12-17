@@ -21,7 +21,7 @@ public class CandleProperties {
     private TickGeneration tickGeneration = new TickGeneration();
     private Map<String, SymbolConfig> symbols = new HashMap<>();
     private List<String> supportedIntervals = new ArrayList<>();
-    private int recentCandlesCacheLimit = 100;
+    private int recentCandlesCacheLimit;
     
     public Set<String> getSupportedSymbols() {
         return symbols.keySet();
@@ -36,14 +36,14 @@ public class CandleProperties {
     @Data
     public static class TickGeneration {
         private boolean enabled = true;
-        private int rateMillis = 500;
+        private int rateMillis;
     }
     
     @Data
     public static class SymbolConfig {
         private PriceBounds bounds;
-        private double spread = 0.5;
-        private double volatility = 1.0;
+        private double spread;
+        private double volatility;
     }
     
     @Data

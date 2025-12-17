@@ -46,6 +46,9 @@ public class RandomTickGenerator implements SmartLifecycle{
 
     @Scheduled(fixedRateString = "${candle.tick-generation.rate-millis:500}")
     public void generateTicks() {
+    	
+    	if (!running) return;  // Skip if stopped
+    	
         long now = System.currentTimeMillis();
         
         properties.getSymbols().forEach((symbol, config) -> {
